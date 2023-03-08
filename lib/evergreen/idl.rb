@@ -12,6 +12,7 @@ module Evergreen
     def initialize
       @handler = IDLSaxHandler.new
       fetch
+      freeze
     end
 
     def fetch
@@ -27,7 +28,7 @@ module Evergreen
       @fields = @handler.idl_fields
     end
 
-    # A SAX parser
+    # A SAX parsing handler
     class IDLSaxHandler
       include REXML::SAX2Listener
       attr_accessor :idl_fields
