@@ -3,3 +3,5 @@ require:
 AllCops:
   TargetRubyVersion: 3.0
   NewCops: enable
+RSpec/ExampleLength:
+  Max: 10
