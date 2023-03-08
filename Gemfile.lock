@@ -1,3 +1,9 @@
+PATH
+  remote: .
+  specs:
+    evergreen-ils (0.1.0)
+      rexml (>= 3.0, < 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -54,6 +60,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  evergreen-ils!
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.48)
