@@ -18,6 +18,7 @@ jobs:
           - '3.1.0'
           - '3.2.0'
           - head
+          - jruby-head
 
     steps:
     - uses: actions/checkout@v3
