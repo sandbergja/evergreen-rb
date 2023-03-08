@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'open-uri'
-require 'ox'
+require 'rexml/parsers/sax2parser'
+require 'rexml/sax2listener'
 
 module Evergreen
   # Evergreen's fieldmapper IDL
@@ -9,23 +10,26 @@ module Evergreen
     attr_reader :fields
 
     def initialize
-      @parser = IDLParser.new
+      @handler = IDLSaxHandler.new
       fetch
     end
 
     def fetch
       begin
         URI.open("https://#{Evergreen.configuration.host}/reports/fm_IDL.xml") do |file|
-          Ox.sax_parse(@parser, file)
+          parser = REXML::Parsers::SAX2Parser.new(file)
+          parser.listen(@handler)
+          parser.parse
         end
       rescue Errno::ECONNREFUSED, OpenURI::HTTPError
         raise Evergreen::ConnectionError
       end
-      @fields = @parser.idl_fields
+      @fields = @handler.idl_fields
     end
 
     # A SAX parser
-    class IDLParser < ::Ox::Sax
+    class IDLSaxHandler
+      include REXML::SAX2Listener
       attr_accessor :idl_fields
 
       def initialize
@@ -34,14 +38,14 @@ module Evergreen
       end
 
       # Callback for when we hit an XML attribute
-      def attr_value(name, value)
-        if name == :id
+      def start_element(_uri, _localname, _qname, attributes)
+        if attributes.key? 'id'
           # We found a class ID!
-          @current_class = value.as_s
+          @current_class = attributes['id']
           @idl_fields[@current_class] = []
-        elsif name == :name
+        elsif attributes.key? 'name'
           # We found the name of a field!
-          @idl_fields[@current_class].push(value.as_s)
+          @idl_fields[@current_class].push(attributes['name'])
         end
       end
     end

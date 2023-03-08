@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     evergreen-ils (0.1.0)
-      ox (>= 2.0, < 3.0)
+      rexml (>= 3.0, < 4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -11,7 +11,6 @@ GEM
     diff-lcs (1.5.0)
     json (2.6.3)
     json (2.6.3-java)
-    ox (2.14.14)
     parallel (1.22.1)
     parser (3.2.1.1)
       ast (~> 2.4.1)
