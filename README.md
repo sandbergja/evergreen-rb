@@ -14,7 +14,20 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
-TODO: Write usage instructions here
+Configure this gem with a hostname, and any other relevant
+options.  If using Rails, you can do this in an initializer:
+
+```
+Evergreen.configure do |config|
+    config.host = 'my.evergreen.server'
+    config.default_username = 'user1'
+    config.default_username = ENV['my_pass']
+    config.read_only = false
+end
+```
+
+You can then access those configurations in your program with
+`Evergreen.configuration.host`.
 
 ## Development
 
