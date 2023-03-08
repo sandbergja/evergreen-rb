@@ -1,4 +1,4 @@
-# Evergreen::ILS
+# Evergreen
 
 A gem for interacting with [Evergreen ILS](https://evergreen-ils.org)
 

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/evergreen/ils/version'
+require_relative 'lib/evergreen/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'evergreen-ils'
-  spec.version = Evergreen::ILS::VERSION
+  spec.version = Evergreen::VERSION
   spec.authors = ['Jane Sandberg']
   spec.email = ['sandbergja@gmail.com']
 

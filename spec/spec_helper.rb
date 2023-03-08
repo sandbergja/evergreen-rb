@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'evergreen/ils'
+require 'evergreen'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
