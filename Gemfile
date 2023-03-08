@@ -12,3 +12,5 @@ gem 'rspec', '~> 3.0'
 gem 'rubocop', '~> 1.48'
 
 gem 'rubocop-rspec', '~> 2.19'
+
+gem "rubocop-performance", "~> 1.16"
