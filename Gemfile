@@ -14,3 +14,5 @@ gem 'rubocop', '~> 1.48'
 gem 'rubocop-rspec', '~> 2.19'
 
 gem 'rubocop-performance', '~> 1.16'
+
+gem 'webmock', '~> 3.18'

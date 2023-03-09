@@ -4,20 +4,27 @@ require 'open-uri'
 require 'rexml/parsers/sax2parser'
 require 'rexml/sax2listener'
 
-module Evergreen
+class Evergreen
   # Evergreen's fieldmapper IDL
   class IDL
     attr_reader :fields
 
-    def initialize
+    def initialize(configuration)
+      @configuration = configuration
       @handler = IDLSaxHandler.new
       fetch
       freeze
     end
 
+    def [](key)
+      fields[key]
+    end
+
+    private
+
     def fetch
       begin
-        URI.open("https://#{Evergreen.configuration.host}/reports/fm_IDL.xml") do |file|
+        URI.open("https://#{@configuration.host}/reports/fm_IDL.xml") do |file|
           parser = REXML::Parsers::SAX2Parser.new(file)
           parser.listen(@handler)
           parser.parse
