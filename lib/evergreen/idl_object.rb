@@ -11,5 +11,9 @@ class Evergreen
     def idl_fields
       @idl[idl_class]
     end
+
+    def get(field_name)
+      data[idl_fields.index(field_name)]
+    end
   end
 end
