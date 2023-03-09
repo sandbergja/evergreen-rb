@@ -14,3 +14,7 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+def fixture_file(filename)
+  File.join(File.dirname(__FILE__), "fixtures/files/#{filename}")
+end

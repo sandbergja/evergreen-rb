@@ -19,7 +19,7 @@ module OpenSRF
       raw = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
         http.request(request)
       end
-      OpenSRF::JSON.parse(::JSON.parse(raw.body).first, ['payload']).data
+      OpenSRF::ClassAndData.parse(::JSON.parse(raw.body).first, ['payload']).data
     end
 
     private
@@ -33,17 +33,17 @@ module OpenSRF
 
     def osrf_message
       [
-        OpenSRF::JSON.new(klass: 'osrfMessage', data: {
-                            'threadTrace' => 0,
-                            'locale' => 'en-CA',
-                            'type' => 'REQUEST',
-                            'payload' => @payload
-                          }).to_h
+        OpenSRF::ClassAndData.new(klass: 'osrfMessage', data: {
+                                    'threadTrace' => 0,
+                                    'locale' => 'en-CA',
+                                    'type' => 'REQUEST',
+                                    'payload' => @payload
+                                  }).to_h
       ]
     end
 
     def req_options
-      { use_ssl: uri.scheme == 'https' }
+      { use_ssl: true }
     end
 
     def uri

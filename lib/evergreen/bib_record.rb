@@ -20,10 +20,10 @@ class Evergreen
     # rubocop:enable Naming/MemoizedInstanceVariableName
 
     def holdings
-      payload = OpenSRF::JSON.new(klass: 'osrfMessage', data: {
-                                    'method' => 'open-ils.cat.asset.copy_tree.global.retrieve',
-                                    'params' => ['', @id.to_s]
-                                  }).to_h
+      payload = OpenSRF::ClassAndData.new(klass: 'osrfMessage', data: {
+                                            'method' => 'open-ils.cat.asset.copy_tree.global.retrieve',
+                                            'params' => ['', @id.to_s]
+                                          }).to_h
       OpenSRF::HTTPTranslatorRequest.new(payload: payload, configuration: @configuration,
                                          service: 'open-ils.cat').response
     end

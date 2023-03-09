@@ -13,8 +13,18 @@ RSpec.describe 'Evergreen::BibRecord' do
         headers: {
           'X-Opensrf-Service' => 'open-ils.pcrud'
         }
-      ).to_return(body: File.read(File.join(File.dirname(__FILE__),
-                                            '../fixtures/files/pcrud-bre.json')))
+      ).to_return(body: File.read(fixture_file('pcrud-bre.json')))
+    stub_request(:post, 'https://my.evergreen.edu/osrf-http-translator')
+      .with(
+        body: 'osrf-msg=[{"__c":"osrfMessage","__p":{"threadTrace":0,"locale":"en-CA",' \
+              '"type":"REQUEST","payload":{"__c":"osrfMessage","__p":{' \
+              '"method":"open-ils.cat.asset.copy_tree.global.retrieve",' \
+              '"params":["","528642"]}}}}]',
+        headers: {
+          'X-Opensrf-Service' => 'open-ils.cat'
+        }
+      )
+      .to_return(body: File.read(fixture_file('copy_tree.global.retrieve.json')))
   end
 
   let(:bib_record) do
@@ -49,8 +59,15 @@ RSpec.describe 'Evergreen::BibRecord' do
     it 'provides a MARC::Record object' do
       expect(bib_record.to_marc).to be_a MARC::Record
     end
+
     it 'is parsed correctly' do
       expect(bib_record.to_marc['245']['a']).to eq 'México :'
+    end
+  end
+
+  describe '#holdings' do
+    it 'fetches holdings' do
+      expect(bib_record.holdings).to be_a Hash
     end
   end
 end

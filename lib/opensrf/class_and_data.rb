@@ -4,7 +4,7 @@ module OpenSRF
   # OpenSRF requests and responses often
   # take the following form
   # {"__c": "clasname", "__p": ["all", "the", "data"]}
-  class JSON
+  class ClassAndData
     attr_reader :klass, :data
 
     def initialize(klass:, data:)
