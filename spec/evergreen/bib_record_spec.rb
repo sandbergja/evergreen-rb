@@ -44,4 +44,13 @@ RSpec.describe 'Evergreen::BibRecord' do
       expect(bib_record.tcn).to eq('528642')
     end
   end
+
+  describe '#to_marc' do
+    it 'provides a MARC::Record object' do
+      expect(bib_record.to_marc).to be_a MARC::Record
+    end
+    it 'is parsed correctly' do
+      expect(bib_record.to_marc['245']['a']).to eq 'México :'
+    end
+  end
 end

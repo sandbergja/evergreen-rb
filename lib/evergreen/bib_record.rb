@@ -15,7 +15,7 @@ class Evergreen
 
     # rubocop:disable Naming/MemoizedInstanceVariableName
     def to_marc
-      @marc ||= MARC::XMLReader.new(StringIO.new(data[idl_fields.index('marc')])).first
+      @marc ||= MARC::XMLReader.new(StringIO.new(get('marc'))).first
     end
     # rubocop:enable Naming/MemoizedInstanceVariableName
 
@@ -29,7 +29,7 @@ class Evergreen
     end
 
     def tcn
-      data[idl_fields.index('tcn_value')]
+      get 'tcn_value'
     end
 
     private
