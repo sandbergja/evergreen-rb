@@ -19,7 +19,7 @@ module OpenSRF
       raw = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
         http.request(request)
       end
-      ::JSON.parse raw.body
+      OpenSRF::JSON.parse(::JSON.parse(raw.body).first, ['payload']).data
     end
 
     private

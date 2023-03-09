@@ -19,6 +19,21 @@ class Evergreen
     end
     # rubocop:enable Naming/MemoizedInstanceVariableName
 
+    def holdings
+      payload = OpenSRF::JSON.new(klass: 'osrfMessage', data: {
+                                    'method' => 'open-ils.cat.asset.copy_tree.global.retrieve',
+                                    'params' => ['', @id.to_s]
+                                  }).to_h
+      OpenSRF::HTTPTranslatorRequest.new(payload: payload, configuration: @configuration,
+                                         service: 'open-ils.cat').response
+    end
+
+    def tcn
+      data[idl_fields.index('tcn_value')]
+    end
+
+    private
+
     def idl_class
       'bre'
     end

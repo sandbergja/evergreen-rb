@@ -15,7 +15,7 @@ class Evergreen
                                     }).to_h
         response = OpenSRF::HTTPTranslatorRequest.new(payload: payload, configuration: @configuration,
                                                       service: 'open-ils.pcrud').response
-        @data = response.first['__p']['payload']['__p']['content']['__p']
+        @data = OpenSRF::JSON.parse(response['content']).data
       end
     end
   end
