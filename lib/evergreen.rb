@@ -14,7 +14,7 @@ loader.setup
 # The main class provided by this gem
 class Evergreen
   include Mixins::RetrievalMethods
-  attr_accessor :configuration
+  attr_reader :configuration
 
   def initialize
     @configuration = Configuration.new
@@ -26,5 +26,6 @@ class Evergreen
     @idl ||= IDL.new(@configuration)
   end
 
+  # An error when we can't connect to the Evergreen server
   class ConnectionError < StandardError; end
 end

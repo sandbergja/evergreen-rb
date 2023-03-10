@@ -23,25 +23,35 @@ class Evergreen
     private
 
     def fetch
-      begin
-        URI.open("https://#{@configuration.host}/reports/fm_IDL.xml") do |file|
-          parser = REXML::Parsers::SAX2Parser.new(file)
-          parser.listen(@handler)
-          parser.parse
-        end
-      rescue Errno::ECONNREFUSED, OpenURI::HTTPError
-        raise Evergreen::ConnectionError
+      URI.open("https://#{@configuration.host}/reports/fm_IDL.xml") do |file|
+        @fields = IDLSaxParser.new(file).parse
       end
-      @fields = @handler.idl_fields
+    rescue Errno::ECONNREFUSED, OpenURI::HTTPError
+      raise Evergreen::ConnectionError
+    end
+
+    # A wrapper around the SAX parser
+    class IDLSaxParser
+      def initialize(file)
+        @parser = REXML::Parsers::SAX2Parser.new(file)
+        @handler = IDLSaxHandler.new
+      end
+
+      def parse
+        @parser.listen(@handler)
+        @parser.parse
+        @handler.idl_fields
+      end
     end
 
     # A SAX parsing handler
     class IDLSaxHandler
       include REXML::SAX2Listener
-      attr_accessor :idl_fields
+      attr_reader :idl_fields
 
       def initialize
         @idl_fields = {}
+        @current_class = nil
         super
       end
 
