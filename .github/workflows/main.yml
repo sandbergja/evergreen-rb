@@ -41,5 +41,15 @@ jobs:
         bundler-cache: true
     - name: Lint the code
       run: bundle exec rubocop
-
-
+  reek:
+    runs-on: ubuntu-latest
+    name: reek
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2.1
+        bundler-cache: true
+    - name: Check for code smells
+      run: bundle exec reek

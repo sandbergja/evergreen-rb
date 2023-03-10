@@ -6,7 +6,7 @@ class Evergreen
     attr_accessor :host, :default_username, :default_password, :read_only
 
     def initialize
-      set_default_values
+      @read_only = true
     end
 
     def configuration_complete
@@ -15,10 +15,6 @@ class Evergreen
     end
 
     private
-
-    def set_default_values
-      @read_only = true
-    end
 
     def check_required_fields
       raise ArgumentError, 'you must supply a host' if field_is_empty :host
