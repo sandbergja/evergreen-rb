@@ -1,0 +1,20 @@
+module OpenSRF
+  # A stateful endpoint, described in
+  # this documentation:
+  # https://docs.evergreen-ils.org/eg/docs/latest/integrations/web_services.html#_http_translator
+  class HTTPTranslatorRequest
+    def initialize: (configuration: untyped, service: untyped, payload: untyped) -> void
+
+    def response: () -> untyped
+
+    private
+
+    def request: () -> untyped
+
+    def osrf_message: () -> ::Array[untyped]
+
+    def req_options: () -> { use_ssl: true }
+
+    def uri: () -> untyped
+  end
+end

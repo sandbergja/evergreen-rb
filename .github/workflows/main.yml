@@ -53,3 +53,15 @@ jobs:
         bundler-cache: true
     - name: Check for code smells
       run: bundle exec reek
+  steep:
+    runs-on: ubuntu-latest
+    name: steep
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2.1
+        bundler-cache: true
+    - name: Static type check
+      run: bundle exec steep check

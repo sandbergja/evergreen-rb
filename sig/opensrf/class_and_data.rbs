@@ -1,0 +1,12 @@
+# TypeProf 0.21.2
+
+# Classes
+module OpenSRF
+  class ClassAndData
+    attr_reader klass: untyped
+    attr_reader data: untyped
+    def initialize: (klass: untyped, data: untyped) -> void
+    def self.parse: (untyped hash, ?Array[untyped] path) -> ClassAndData
+    def to_h: -> Hash[String, untyped]
+  end
+end
