@@ -8,8 +8,10 @@ on:
   pull_request:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_WITHOUT: check
     name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
@@ -31,6 +33,8 @@ jobs:
       run: bundle exec rake
   rubocop:
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_WITHOUT: test
     name: rubocop
     steps:
     - uses: actions/checkout@v3
@@ -40,9 +44,11 @@ jobs:
         ruby-version: 3.2.1
         bundler-cache: true
     - name: Lint the code
-      run: bundle exec rubocop
+      run: bundle exec rubocop --parallel
   reek:
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_WITHOUT: test
     name: reek
     steps:
     - uses: actions/checkout@v3
@@ -55,6 +61,8 @@ jobs:
       run: bundle exec reek
   steep:
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_WITHOUT: test
     name: steep
     steps:
     - uses: actions/checkout@v3
