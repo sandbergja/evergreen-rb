@@ -1,0 +1,22 @@
+class Evergreen
+  # Configuration for an instance of Evergreen
+  class Configuration
+    attr_accessor host: untyped
+
+    attr_accessor default_username: untyped
+
+    attr_accessor default_password: untyped
+
+    attr_accessor read_only: untyped
+
+    def initialize: () -> void
+
+    def configuration_complete: () -> untyped
+
+    private
+
+    def check_required_fields: () -> (nil | untyped)
+
+    def field_is_empty: (untyped field_name) -> untyped
+  end
+end

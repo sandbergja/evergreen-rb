@@ -15,5 +15,14 @@ class Evergreen
     def get(field_name)
       data[idl_fields.index(field_name)]
     end
+
+    private
+
+    # This should be overriden by subclasses
+    def idl_class
+      'acp'
+    end
+
+    def data; end
   end
 end

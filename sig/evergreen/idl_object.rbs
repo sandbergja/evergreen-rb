@@ -1,0 +1,10 @@
+class Evergreen::IDLObject
+    @idl: untyped
+
+    def initialize: (untyped idl) -> void
+    def idl_fields: -> untyped
+
+    private
+    def idl_class: -> String
+    def data: -> untyped
+end
