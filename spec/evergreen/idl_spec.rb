@@ -5,9 +5,7 @@ require 'open-uri'
 
 RSpec.describe 'Evergreen::IDL' do
   let(:config) do
-    config = Evergreen::Configuration.new
-    config.host = '123'
-    config
+    Evergreen::Configuration.new(host: '123')
   end
 
   before do

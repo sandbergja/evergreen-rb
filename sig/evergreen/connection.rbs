@@ -1,0 +1,13 @@
+class Evergreen
+  # This class provides an interface for making
+  # requests to the Evergreen server
+  class Connection
+    attr_reader configuration: Evergreen::Configuration
+
+    def initialize: (configuration: untyped) -> void
+
+    def close: () -> nil
+
+    def idl: () -> Evergreen::IDL
+  end
+end

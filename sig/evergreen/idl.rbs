@@ -1,0 +1,31 @@
+class Evergreen
+  # Evergreen's fieldmapper IDL
+  class IDL
+    attr_reader fields: untyped
+
+    def initialize: (untyped configuration) -> void
+
+    def []: (untyped key) -> untyped
+
+    private
+
+    def fetch: () -> untyped
+
+    # A wrapper around the SAX parser
+    class IDLSaxParser
+      def initialize: (untyped file) -> void
+
+      def parse: () -> untyped
+    end
+
+    # A SAX parsing handler
+    class IDLSaxHandler
+      attr_reader idl_fields: untyped
+
+      def initialize: () -> void
+
+      # Callback for when we hit an XML attribute
+      def start_element: (untyped _uri, untyped _localname, untyped _qname, untyped attributes) -> (untyped | untyped | nil)
+    end
+  end
+end

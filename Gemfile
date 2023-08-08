@@ -17,8 +17,12 @@ group :check do
   gem 'flog'
   gem 'rbs'
   gem 'reek'
-  gem 'rubocop'
-  gem 'rubocop-performance'
-  gem 'rubocop-rspec'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rspec', require: false
   gem 'steep'
+end
+
+group :development do
+  gem 'debug'
 end

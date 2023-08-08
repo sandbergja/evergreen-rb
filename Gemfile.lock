@@ -21,6 +21,9 @@ GEM
     crack (0.4.5)
       rexml
     csv (3.2.7)
+    debug (1.8.0)
+      irb (>= 1.5.0)
+      reline (>= 0.3.1)
     diff-lcs (1.5.0)
     erubi (1.12.0)
     ffi (1.15.5)
@@ -38,6 +41,10 @@ GEM
     hashdiff (1.0.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    io-console (0.6.0)
+    io-console (0.6.0-java)
+    irb (1.7.4)
+      reline (>= 0.3.6)
     json (2.6.3)
     json (2.6.3-java)
     kwalify (0.7.2)
@@ -70,6 +77,8 @@ GEM
       parser (~> 3.2.0)
       rainbow (>= 2.0, < 4.0)
     regexp_parser (2.8.1)
+    reline (0.3.7)
+      io-console (~> 0.5)
     rexml (3.2.6)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
@@ -153,6 +162,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  debug
   evergreen-ils!
   flay
   flog
