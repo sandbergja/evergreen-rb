@@ -3,18 +3,22 @@
 class Evergreen
   # Configuration for an instance of Evergreen
   class Configuration
-    attr_accessor :host, :default_username, :default_password, :read_only
+    attr_reader :host, :default_username, :default_password, :read_only
 
-    def initialize
+    def initialize(config_hash)
       @read_only = true
+      config_hash.each_pair do |key, value|
+        instance_variable_set("@#{key}", value)
+      end
+      configuration_complete
     end
+
+    private
 
     def configuration_complete
       check_required_fields
       freeze
     end
-
-    private
 
     def check_required_fields
       raise ArgumentError, 'you must supply a host' if field_is_empty :host

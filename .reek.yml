@@ -16,5 +16,8 @@ detectors:
   NilCheck:
     exclude:
     - Evergreen::Configuration#field_is_empty
+  UtilityFunction:
+    exclude:
+    - Evergreen#initialize
 exclude_paths:
   - spec

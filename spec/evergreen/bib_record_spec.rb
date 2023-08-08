@@ -28,8 +28,7 @@ RSpec.describe 'Evergreen::BibRecord' do
   end
 
   let(:bib_record) do
-    configuration = Evergreen::Configuration.new
-    configuration.host = 'my.evergreen.edu'
+    configuration = Evergreen::Configuration.new(host: 'my.evergreen.edu')
     Evergreen::BibRecord.new(id: 528_642, configuration: configuration, idl: {
                                'bre' => %w[call_numbers fixed_fields active create_date creator deleted
                                            edit_date editor fingerprint id last_xact_id marc quality source tcn_source
@@ -43,10 +42,9 @@ RSpec.describe 'Evergreen::BibRecord' do
   end
 
   it 'has a convenience method for creation' do
-    evergreen = Evergreen.new do |config|
-      config.host = '123'
+    Evergreen.new(host: 'my.evergreen.edu') do |evergreen|
+      expect(evergreen.get_bib_record('456')).to be_instance_of(Evergreen::BibRecord)
     end
-    expect(evergreen.get_bib_record('456')).to be_instance_of(Evergreen::BibRecord)
   end
 
   describe '#tcn' do

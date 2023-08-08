@@ -9,7 +9,7 @@ class Evergreen
 
     attr_accessor read_only: untyped
 
-    def initialize: () -> void
+    def initialize: (Hash[Symbol, (String | bool)]) -> void
 
     def configuration_complete: () -> untyped
 

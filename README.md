@@ -41,13 +41,13 @@ You can then access those configurations in your app at
 Once you have an object:
 
 ```
-evergreen = Evergreen.new { |config| config.host = 'my.evergreen.server' }
-bib = evergreen.get_bib_record(123)
-bib.to_marc
-evergreen.get_item(345)
-evergreen.get_call_number(2345)
+Evergreen.new(host: 'my.evergreen.server') do |evergreen|
+  bib = evergreen.get_bib_record(123)
+  bib.to_marc
+  evergreen.get_item(345)
+  evergreen.get_call_number(2345)
+end
 ```
-
 
 
 ## Development
