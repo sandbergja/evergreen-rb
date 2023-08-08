@@ -1,0 +1,19 @@
+class Evergreen
+  # A bibliographic record (title)
+  class BibRecord < IDLObject
+    def initialize: (id: untyped, configuration: untyped, idl: untyped) -> void
+
+    # rubocop:disable Naming/MemoizedInstanceVariableName
+    def to_marc: () -> untyped
+
+    def holdings: () -> untyped
+
+    def tcn: () -> untyped
+
+    private
+
+    def idl_class: () -> "bre"
+
+    def data: () -> (untyped)
+  end
+end

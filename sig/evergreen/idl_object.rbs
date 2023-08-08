@@ -1,10 +1,18 @@
-class Evergreen::IDLObject
-    @idl: untyped
-
+class Evergreen
+  # A base class for any object represented in
+  # Evergreen's IDL
+  class IDLObject
     def initialize: (untyped idl) -> void
-    def idl_fields: -> untyped
+
+    def idl_fields: () -> untyped
+
+    def get: (untyped field_name) -> untyped
 
     private
-    def idl_class: -> String
-    def data: -> untyped
+
+    # This should be overriden by subclasses
+    def idl_class: () -> "acp"
+
+    def data: () -> untyped
+  end
 end
