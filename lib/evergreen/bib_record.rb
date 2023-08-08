@@ -6,7 +6,6 @@ require 'stringio'
 class Evergreen
   # A bibliographic record (title)
   class BibRecord < IDLObject
-    include Mixins::AnonymousPcrud
     def initialize(id:, configuration:, idl:)
       @id = id
       @configuration = configuration
@@ -36,6 +35,19 @@ class Evergreen
 
     def idl_class
       'bre'
+    end
+
+    def data
+      return @data if @data
+      return unless @id && @configuration && idl_class && idl_fields
+
+      payload = OpenSRF::ClassAndData.new(klass: 'osrfMessage', data: {
+                                            'method' => "open-ils.pcrud.retrieve.#{idl_class}",
+                                            'params' => ['ANONYMOUS', @id.to_s]
+                                          }).to_h
+      response = OpenSRF::HTTPTranslatorRequest.new(payload: payload, configuration: @configuration,
+                                                    service: 'open-ils.pcrud').response
+      @data = OpenSRF::ClassAndData.parse(response['content']).data
     end
   end
 end

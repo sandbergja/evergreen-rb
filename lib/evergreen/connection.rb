@@ -4,7 +4,6 @@ class Evergreen
   # This class provides an interface for making
   # requests to the Evergreen server
   class Connection
-    include Mixins::RetrievalMethods
     attr_reader :configuration
 
     def initialize(configuration:)
@@ -15,6 +14,10 @@ class Evergreen
 
     def idl
       @idl ||= IDL.new(@configuration)
+    end
+
+    def get_bib_record(id)
+      Evergreen::BibRecord.new(id: id, configuration: configuration, idl: idl)
     end
   end
 end
