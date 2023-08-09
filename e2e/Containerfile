@@ -1,0 +1,7 @@
+FROM ruby:3.2
+
+WORKDIR /myapp
+COPY . /myapp
+RUN bundle install
+
+ENTRYPOINT ["bundle", "exec", "rspec", "e2e"]

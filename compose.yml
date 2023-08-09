@@ -1,0 +1,5 @@
+  this.net.request( 'open-ils.booking',
+    'open-ils.booking.resources.create_from_copies',
+    this.auth.token(), [1, 2, 3])
+    .subscribe(() => { alert('Those items are bookable now')});
+  alert('this alert does not wait for the db call');
