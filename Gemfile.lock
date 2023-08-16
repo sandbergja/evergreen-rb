@@ -9,7 +9,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.6)
+    activesupport (7.0.7)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -123,7 +123,7 @@ GEM
     scrub_rb (1.0.1)
     securerandom (0.2.2)
     sexp_processor (4.17.0)
-    steep (1.5.2)
+    steep (1.5.3)
       activesupport (>= 5.1)
       concurrent-ruby (>= 1.1.10)
       csv (>= 3.0.9)
